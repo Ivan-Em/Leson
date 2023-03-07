@@ -3,7 +3,7 @@
 
 class MyProgram{
     public static void main(String[] args){
-        //для Git
+        
         int[] a = new int[]{1, 2, 3};
         int[] c = a;
         c[0] = 5;
