@@ -7,48 +7,42 @@ class MyProgram{
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
             int n=sc.nextInt();
-            String name=null, name3=null;
-            String cmd="";
+            sc.nextLine();
+            String name3="";
         ArrayList<String> list=new ArrayList<>();
-        for (int i=0;i<=n;i++) {
-            cmd = sc.nextLine();
-
-            if (cmd.equalsIgnoreCase("Добавить")) {
-                name = sc.nextLine();
-                list.add(name);
-                System.out.println(name + " в очереди"); cmd="";
-            }else
-
-
-            if (cmd.equalsIgnoreCase("Следующий!")) {
+        for (int i=0;i<n;i++) {
+            String cmd1=sc.nextLine();
+            String[]cmd=cmd1.split(" ");
+            if (cmd1.length() == 10) {
+                 cmd=cmd1.split("");
+            }
+            if (cmd1.equalsIgnoreCase("Следующий!")) {
                 if (list.isEmpty()) {System.out.println("Отлично, попью чаёк!");
                 }else { name3=list.get(0);
-                System.out.println(name3+" в обработке");
-                list.remove(0); cmd="";
+                    System.out.println(name3+" в обработке");
+                    list.remove(0);
                 }
-            }else
-            if (cmd.equalsIgnoreCase("посмотреть очередь")) {
-                if (list.isEmpty()) {
-                    System.out.println("прокатилось перекати-поле"); cmd="";
+            }
+            if (cmd[0].equalsIgnoreCase("Добавить")) {
+                list.add(cmd[1]);
+                System.out.println(cmd[1] + " в очереди");
+            }
+            if (cmd[0].equalsIgnoreCase("посмотреть")) {
+                if (list.size()==0) {
+                    System.out.println("*прокатилось перекати-поле*");
                 } else {
                     System.out.print(String.join(" ", list));
-                    System.out.println(); cmd="";
+                    System.out.println();
                 }
             }else
-            if (cmd.equalsIgnoreCase("Стоит ли оно того?")) {
-                name=sc.nextLine(); cmd="";
-                if (list.size()<5){list.add(name);}else {System.out.println("Слабак");}
+            if (cmd[0].equalsIgnoreCase("Стоит")) {
+                if (list.size()<5){list.add(cmd[4]);}else {System.out.println("Слабак!");}
+            }else
+            if (cmd[1].equalsIgnoreCase("занимала")){
+                 if (cmd[3].equalsIgnoreCase(name3)){ list.add(0,cmd[0]);}
+                 else if (list.contains(cmd[3])) { int index=list.indexOf(cmd[3]); list.add(index+1,cmd[0]);}
+                 else{ list.add(cmd[0]); System.out.println(cmd[0]+", не надо тут ля-ля"); }
             }
-            if (cmd!=""){
-                sc.nextLine();
-                 String name2=sc.nextLine();
-
-                 if (name2.equalsIgnoreCase(name3)){ list.add(0,cmd);}
-                 else if (list.contains(name2)) { int index=list.indexOf(name2); list.add(index+1,cmd);}
-                 else{ list.add(cmd); System.out.println(cmd+" не надо тут ля-ля"); }
-
-            }
-
         }
     }
 }
